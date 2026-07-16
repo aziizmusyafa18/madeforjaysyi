@@ -76,7 +76,26 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 3. Floating Particles (Hearts & Flowers) ---
+    // --- 3. Tab Visibility Logic (Pause music when tab is hidden, resume when back) ---
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+            // Tab tidak aktif — pause jika sedang main
+            if (isPlaying) {
+                bgMusic.pause();
+                musicIcon.className = "fa-solid fa-compact-disc";
+                musicToggleBtn.classList.remove("playing");
+            }
+        } else {
+            // Tab aktif kembali — lanjut play jika sebelumnya sedang main
+            if (isPlaying) {
+                bgMusic.play().catch(() => {});
+                musicIcon.className = "fa-solid fa-compact-disc rotate";
+                musicToggleBtn.classList.add("playing");
+            }
+        }
+    });
+
+    // --- 4. Floating Particles (Hearts & Flowers) ---
     const particleTypes = [
         '<span style="color: #8B5E3C;">★</span>', 
         '<span style="color: #C9956A;">✦</span>', 
