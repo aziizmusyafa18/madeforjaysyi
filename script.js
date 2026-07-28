@@ -244,31 +244,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- 6. Interactive Photo Album Page Flipping ---
     const pages = document.querySelectorAll(".album-page");
-    const albumPrevBtn = document.getElementById("album-prev-btn");
-    const albumNextBtn = document.getElementById("album-next-btn");
     
     let activePageIndex = 0;
     const totalPages = pages.length;
-
-    function updateNavigation() {
-        // Prev button state
-        if (activePageIndex === 0) {
-            albumPrevBtn.disabled = true;
-            albumPrevBtn.classList.add("disabled");
-        } else {
-            albumPrevBtn.disabled = false;
-            albumPrevBtn.classList.remove("disabled");
-        }
-
-        // Next button state
-        if (activePageIndex === totalPages - 1) {
-            albumNextBtn.disabled = true;
-            albumNextBtn.classList.add("disabled");
-        } else {
-            albumNextBtn.disabled = false;
-            albumNextBtn.classList.remove("disabled");
-        }
-    }
 
     function flipNext() {
         if (activePageIndex < totalPages - 1) {
@@ -280,31 +258,8 @@ document.addEventListener("DOMContentLoaded", () => {
             
             const nextPage = pages[activePageIndex];
             nextPage.classList.add("active");
-            
-            updateNavigation();
         }
     }
-
-    function flipPrev() {
-        if (activePageIndex > 0) {
-            const currentPage = pages[activePageIndex];
-            currentPage.classList.remove("active");
-            
-            activePageIndex--;
-            
-            const prevPage = pages[activePageIndex];
-            prevPage.classList.remove("flipped");
-            prevPage.classList.add("active");
-            
-            updateNavigation();
-        }
-    }
-
-    // Next page click trigger on navigation button
-    albumNextBtn.addEventListener("click", flipNext);
-
-    // Previous page click trigger on navigation button
-    albumPrevBtn.addEventListener("click", flipPrev);
 
     // Clicking the pages directly flips them forward!
     pages.forEach((page, idx) => {
@@ -398,7 +353,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 // Apply absolute position and transform coordinates
                 div.style.left = `calc(50% + ${x * scaleX}px)`;
-                div.style.top = `calc(50% + ${y * scaleY + 15}px)`; // offset Y slightly to balance center text
+                div.style.top = `calc(50% + ${y * scaleY - 15}px)`; // offset Y ke atas agar teks center di bawah area love
                 div.style.transform = `translate(-50%, -50%) scale(1) rotate(${randomRotate}deg)`;
                 div.style.opacity = "1";
             }
@@ -432,7 +387,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 page.classList.remove("active");
             }
         });
-        updateNavigation();
 
         // 3. Reset Cake Candles
         cakeBlown = false;

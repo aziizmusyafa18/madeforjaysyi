@@ -1014,13 +1014,29 @@ body {
 }
 
 .heart-center-text {
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   gap: 4px;
-  z-index: 5;
-  animation: fadeIn 2s ease-out;
+  z-index: 20;
+  animation: fadeInCenter 2s ease-out;
+  pointer-events: none;
+}
+
+@keyframes fadeInCenter {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
 .heart-wish {
